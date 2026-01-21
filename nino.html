@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NINO THE MAGNIFICENT - A Legend Among Dogs</title>
+    <!--
+        TO ADD REAL NINO PHOTOS:
+        1. Save your photos to the images/ folder as:
+           - nino-main.jpg (main circular photo)
+           - nino-couch.jpg (couch photo)
+           - nino-bed.jpg (bed photo)
+           - nino-table.jpg (picnic table photo)
+           - nino-stare.jpg (staring photo)
+        2. Replace the placedog.net URLs below with:
+           - images/nino-main.jpg
+           - images/nino-couch.jpg
+           - images/nino-bed.jpg
+           - images/nino-table.jpg
+           - images/nino-stare.jpg
+    -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        /* Epic Header */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 165, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 69, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(139, 69, 19, 0.2) 0%, transparent 50%);
+            animation: cosmicSwirl 20s linear infinite;
+        }
+
+        @keyframes cosmicSwirl {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .title-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 6rem;
+            color: #ffd700;
+            text-shadow:
+                4px 4px 0px #ff6b00,
+                8px 8px 0px #8b4513,
+                12px 12px 20px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: #ffaa00;
+            margin-top: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Nino Photo Container */
+        .nino-photo-main {
+            position: relative;
+            margin: 2rem 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .nino-photo-main img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid #ffd700;
+            box-shadow:
+                0 0 30px rgba(255, 215, 0, 0.5),
+                0 0 60px rgba(255, 165, 0, 0.3),
+                inset 0 0 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nino-photo-main:hover img {
+            transform: scale(1.1);
+            box-shadow:
+                0 0 50px rgba(255, 215, 0, 0.8),
+                0 0 100px rgba(255, 165, 0, 0.5);
+        }
+
+        .click-me {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff4500;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            animation: bounce 1s ease-in-out infinite;
+            font-size: 1.2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Roar Overlay */
+        .roar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,69,0,0.9) 0%, rgba(139,0,0,0.95) 100%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .roar-overlay.active {
+            display: flex;
+            animation: roarShake 0.5s ease-in-out;
+        }
+
+        @keyframes roarShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        .roar-text {
+            font-family: 'Bangers', cursive;
+            font-size: 15rem;
+            color: #ffd700;
+            text-shadow:
+                0 0 20px #ff0000,
+                0 0 40px #ff4500,
+                0 0 60px #ff6347,
+                8px 8px 0px #8b0000;
+            animation: roarPulse 0.2s ease-in-out infinite;
+        }
+
+        @keyframes roarPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .roar-subtitle {
+            font-size: 3rem;
+            color: #fff;
+            margin-top: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Navigation */
+        .nav-arrow {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-decoration: none;
+            color: #ffd700;
+            font-size: 3rem;
+            animation: arrowBounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+
+        /* Weight Section */
+        .weight-section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, #0f3460 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative;
+        }
+
+        .weight-section h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            text-align: center;
+            color: #ffd700;
+            text-shadow: 3px 3px 0px #ff6b00;
+            margin-bottom: 1rem;
+        }
+
+        .weight-subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #ffaa00;
+            margin-bottom: 3rem;
+        }
+
+        .current-weight {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .weight-number {
+            font-family: 'Bangers', cursive;
+            font-size: 8rem;
+            color: #00ff88;
+            text-shadow:
+                4px 4px 0px #008844,
+                0 0 30px rgba(0, 255, 136, 0.5);
+            animation: weightGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes weightGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .weight-unit {
+            font-size: 3rem;
+            color: #88ffbb;
+        }
+
+        .weight-comment {
+            font-size: 1.5rem;
+            color: #ffaa00;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .chart-title {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* SVG Chart */
+        .weight-chart {
+            width: 100%;
+            height: 400px;
+        }
+
+        .chart-line {
+            fill: none;
+            stroke: #00ff88;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
+        }
+
+        .chart-area {
+            fill: url(#chartGradient);
+            opacity: 0.5;
+        }
+
+        .chart-point {
+            fill: #ffd700;
+            stroke: #ff6b00;
+            stroke-width: 3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chart-point:hover {
+            r: 12;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+        }
+
+        .chart-label {
+            fill: #fff;
+            font-size: 12px;
+            text-anchor: middle;
+        }
+
+        .axis-label {
+            fill: #ffaa00;
+            font-size: 14px;
+        }
+
+        .grid-line {
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 1;
+        }
+
+        /* Photo Gallery */
+        .gallery-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, #16213e 0%, #1a1a2e 100%);
+        }
+
+        .gallery-section h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            text-align: center;
+            color: #ffd700;
+            text-shadow: 3px 3px 0px #ff6b00;
+            margin-bottom: 3rem;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 4px solid #ffd700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 2rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption h3 {
+            color: #ffd700;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+        }
+
+        .gallery-caption p {
+            color: #fff;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Fun Facts */
+        .fun-facts {
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f3460 100%);
+        }
+
+        .fun-facts h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            text-align: center;
+            color: #ffd700;
+            text-shadow: 3px 3px 0px #ff6b00;
+            margin-bottom: 3rem;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .fact-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .fact-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .fact-card h3 {
+            color: #ffd700;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fact-card p {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: #0f0f1a;
+            color: #666;
+        }
+
+        footer .paw-prints {
+            font-size: 2rem;
+            letter-spacing: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Floating Paws */
+        .floating-paw {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: floatPaw 10s linear infinite;
+            z-index: 5;
+        }
+
+        @keyframes floatPaw {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .subtitle { font-size: 1.2rem; }
+            .roar-text { font-size: 8rem; }
+            .weight-number { font-size: 5rem; }
+            .weight-section h2,
+            .gallery-section h2,
+            .fun-facts h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Paws Background -->
+    <div class="floating-paw" style="left: 10%; animation-delay: 0s;">🐾</div>
+    <div class="floating-paw" style="left: 30%; animation-delay: 3s;">🐾</div>
+    <div class="floating-paw" style="left: 50%; animation-delay: 6s;">🐾</div>
+    <div class="floating-paw" style="left: 70%; animation-delay: 2s;">🐾</div>
+    <div class="floating-paw" style="left: 90%; animation-delay: 4s;">🐾</div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="title-container">
+            <h1>NINO</h1>
+            <p class="subtitle">The Absolute Unit - A Legend Among Dogs</p>
+        </div>
+
+        <div class="nino-photo-main" id="roarTrigger">
+            <img src="https://placedog.net/400/400?id=1" alt="Nino the Magnificent" id="ninoPhoto">
+            <span class="click-me">CLICK FOR ROAR!</span>
+        </div>
+
+        <a href="#weight" class="nav-arrow">
+            <span>&#x25BC;</span>
+        </a>
+    </section>
+
+    <!-- Roar Overlay -->
+    <div class="roar-overlay" id="roarOverlay">
+        <div class="roar-text">ROAR!</div>
+        <div class="roar-subtitle">*earth-shattering good boy noises*</div>
+    </div>
+
+    <!-- Weight Section -->
+    <section class="weight-section" id="weight">
+        <h2>WHAT DOES NINO WEIGH?</h2>
+        <p class="weight-subtitle">Spoiler: He's an absolute chonky legend</p>
+
+        <div class="current-weight">
+            <div class="weight-number">89.2</div>
+            <div class="weight-unit">POUNDS OF PURE MAJESTY</div>
+            <p class="weight-comment">"He's not fat, he's just full of love (and treats)"</p>
+        </div>
+
+        <div class="chart-container">
+            <h3 class="chart-title">Nino's Glorious Weight Journey</h3>
+            <svg class="weight-chart" viewBox="0 0 800 400">
+                <defs>
+                    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.5" />
+                        <stop offset="100%" style="stop-color:#00ff88;stop-opacity:0" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Grid Lines -->
+                <line class="grid-line" x1="50" y1="50" x2="750" y2="50"/>
+                <line class="grid-line" x1="50" y1="125" x2="750" y2="125"/>
+                <line class="grid-line" x1="50" y1="200" x2="750" y2="200"/>
+                <line class="grid-line" x1="50" y1="275" x2="750" y2="275"/>
+                <line class="grid-line" x1="50" y1="350" x2="750" y2="350"/>
+
+                <!-- Y-axis labels -->
+                <text class="axis-label" x="40" y="55" text-anchor="end">95</text>
+                <text class="axis-label" x="40" y="130" text-anchor="end">90</text>
+                <text class="axis-label" x="40" y="205" text-anchor="end">85</text>
+                <text class="axis-label" x="40" y="280" text-anchor="end">80</text>
+                <text class="axis-label" x="40" y="355" text-anchor="end">75</text>
+
+                <!-- Area fill -->
+                <path class="chart-area" d="M100,230 L200,200 L300,170 L400,155 L500,140 L600,125 L700,110 L700,350 L100,350 Z"/>
+
+                <!-- Line -->
+                <path class="chart-line" d="M100,230 L200,200 L300,170 L400,155 L500,140 L600,125 L700,110"/>
+
+                <!-- Data Points -->
+                <circle class="chart-point" cx="100" cy="230" r="8"/>
+                <circle class="chart-point" cx="200" cy="200" r="8"/>
+                <circle class="chart-point" cx="300" cy="170" r="8"/>
+                <circle class="chart-point" cx="400" cy="155" r="8"/>
+                <circle class="chart-point" cx="500" cy="140" r="8"/>
+                <circle class="chart-point" cx="600" cy="125" r="8"/>
+                <circle class="chart-point" cx="700" cy="110" r="8" style="fill: #ff4500; r: 10;"/>
+
+                <!-- X-axis labels -->
+                <text class="chart-label" x="100" y="380">Jan</text>
+                <text class="chart-label" x="200" y="380">Mar</text>
+                <text class="chart-label" x="300" y="380">May</text>
+                <text class="chart-label" x="400" y="380">Jul</text>
+                <text class="chart-label" x="500" y="380">Sep</text>
+                <text class="chart-label" x="600" y="380">Nov</text>
+                <text class="chart-label" x="700" y="380" style="fill: #ff4500; font-weight: bold;">NOW!</text>
+
+                <!-- Weight labels on points -->
+                <text class="chart-label" x="100" y="215" style="fill: #00ff88;">83.5</text>
+                <text class="chart-label" x="200" y="185" style="fill: #00ff88;">85.1</text>
+                <text class="chart-label" x="300" y="155" style="fill: #00ff88;">86.3</text>
+                <text class="chart-label" x="400" y="140" style="fill: #00ff88;">87.0</text>
+                <text class="chart-label" x="500" y="125" style="fill: #00ff88;">87.8</text>
+                <text class="chart-label" x="600" y="110" style="fill: #00ff88;">88.5</text>
+                <text class="chart-label" x="700" y="95" style="fill: #ff4500; font-weight: bold; font-size: 14px;">89.2!</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="gallery-section" id="gallery">
+        <h2>THE MANY MOODS OF NINO</h2>
+
+        <div class="photo-gallery">
+            <div class="gallery-item">
+                <img src="https://placedog.net/500/500?id=10" alt="Nino on the couch">
+                <div class="gallery-caption">
+                    <h3>The Royal Throne</h3>
+                    <p>Nino claiming the couch like the king he is</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://placedog.net/500/500?id=15" alt="Nino on the bed">
+                <div class="gallery-caption">
+                    <h3>Philosophical Nino</h3>
+                    <p>Contemplating the meaning of treats</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://placedog.net/500/500?id=20" alt="Nino on picnic table">
+                <div class="gallery-caption">
+                    <h3>Sun Worship Mode</h3>
+                    <p>Charging his solar-powered goodness</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://placedog.net/500/500?id=25" alt="Nino staring">
+                <div class="gallery-caption">
+                    <h3>The Stare of Judgment</h3>
+                    <p>He knows what you did. He forgives you anyway.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Facts -->
+    <section class="fun-facts" id="facts">
+        <h2>CERTIFIED NINO FACTS</h2>
+
+        <div class="facts-grid">
+            <div class="fact-card">
+                <div class="fact-icon">🦴</div>
+                <h3>Treat Detector</h3>
+                <p>Can hear a treat bag open from 3 miles away</p>
+            </div>
+
+            <div class="fact-card">
+                <div class="fact-icon">🛋️</div>
+                <h3>Couch Domination</h3>
+                <p>Has claimed 89.2 lbs worth of couch real estate</p>
+            </div>
+
+            <div class="fact-card">
+                <div class="fact-icon">🎵</div>
+                <h3>Vocal Range</h3>
+                <p>His roar can be heard in 7 dimensions</p>
+            </div>
+
+            <div class="fact-card">
+                <div class="fact-icon">❤️</div>
+                <h3>Love Capacity</h3>
+                <p>Infinite. Literally cannot be measured.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="paw-prints">🐾 🐾 🐾 🐾 🐾</div>
+        <p>Made with love for the goodest boy | Nino Fan Club Est. Forever</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">All weights are 100% real and 100% majestic</p>
+    </footer>
+
+    <script>
+        // Roar functionality
+        const roarTrigger = document.getElementById('roarTrigger');
+        const roarOverlay = document.getElementById('roarOverlay');
+
+        // Roar sounds - we'll generate them with Web Audio API
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playRoar() {
+            // Create oscillator for a funny "ROAR" sound
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            // Start with a low growl
+            oscillator.frequency.setValueAtTime(100, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
+            oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.3);
+            oscillator.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + 0.5);
+            oscillator.frequency.exponentialRampToValueAtTime(60, audioContext.currentTime + 0.8);
+
+            oscillator.type = 'sawtooth';
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 1);
+
+            // Add a second layer for more "roar" effect
+            const oscillator2 = audioContext.createOscillator();
+            const gainNode2 = audioContext.createGain();
+
+            oscillator2.connect(gainNode2);
+            gainNode2.connect(audioContext.destination);
+
+            oscillator2.frequency.setValueAtTime(150, audioContext.currentTime);
+            oscillator2.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.15);
+            oscillator2.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.4);
+
+            oscillator2.type = 'square';
+
+            gainNode2.gain.setValueAtTime(0.15, audioContext.currentTime);
+            gainNode2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+
+            oscillator2.start(audioContext.currentTime);
+            oscillator2.stop(audioContext.currentTime + 0.8);
+        }
+
+        roarTrigger.addEventListener('click', () => {
+            roarOverlay.classList.add('active');
+            playRoar();
+
+            // Add screen shake effect
+            document.body.style.animation = 'none';
+            document.body.offsetHeight; // Trigger reflow
+            document.body.style.animation = 'roarShake 0.5s ease-in-out';
+
+            setTimeout(() => {
+                roarOverlay.classList.remove('active');
+                document.body.style.animation = '';
+            }, 1500);
+        });
+
+        // Click anywhere to dismiss roar
+        roarOverlay.addEventListener('click', () => {
+            roarOverlay.classList.remove('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add weight counter animation
+        function animateWeight() {
+            const weightNumber = document.querySelector('.weight-number');
+            const targetWeight = 89.2;
+            let currentWeight = 0;
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                currentWeight = targetWeight * easeOut;
+
+                weightNumber.textContent = currentWeight.toFixed(1);
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Trigger weight animation when section is visible
+        const weightSection = document.getElementById('weight');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateWeight();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(weightSection);
+
+        // Chart point tooltips
+        document.querySelectorAll('.chart-point').forEach((point, index) => {
+            const weights = [83.5, 85.1, 86.3, 87.0, 87.8, 88.5, 89.2];
+            const months = ['January', 'March', 'May', 'July', 'September', 'November', 'Now'];
+
+            point.addEventListener('mouseenter', () => {
+                point.style.transform = 'scale(1.5)';
+            });
+
+            point.addEventListener('mouseleave', () => {
+                point.style.transform = 'scale(1)';
+            });
+        });
+
+        // Random paw placement
+        document.querySelectorAll('.floating-paw').forEach((paw, index) => {
+            paw.style.animationDuration = (8 + Math.random() * 6) + 's';
+        });
+    </script>
+</body>
+</html>
