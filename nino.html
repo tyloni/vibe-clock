@@ -20,7 +20,7 @@
            - images/nino-stare.jpg
     -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
         * {
             margin: 0;
@@ -29,7 +29,7 @@
         }
 
         body {
-            font-family: 'Comic Neue', cursive;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             overflow-x: hidden;
@@ -71,14 +71,14 @@
         }
 
         h1 {
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
             font-size: 6rem;
             color: #ffd700;
             text-shadow:
-                4px 4px 0px #ff6b00,
-                8px 8px 0px #8b4513,
-                12px 12px 20px rgba(0,0,0,0.5);
-            letter-spacing: 0.1em;
+                2px 2px 0px #ff6b00,
+                4px 4px 20px rgba(0,0,0,0.5);
+            letter-spacing: 0.05em;
             animation: titlePulse 2s ease-in-out infinite;
         }
 
@@ -168,7 +168,7 @@
         }
 
         .roar-text {
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 15rem;
             color: #ffd700;
             text-shadow:
@@ -218,7 +218,7 @@
         }
 
         .weight-section h2 {
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 4rem;
             text-align: center;
             color: #ffd700;
@@ -239,7 +239,7 @@
         }
 
         .weight-number {
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 8rem;
             color: #00ff88;
             text-shadow:
@@ -277,7 +277,7 @@
         }
 
         .chart-title {
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 2rem;
             color: #ffd700;
             text-align: center;
@@ -340,7 +340,7 @@
         }
 
         .gallery-section h2 {
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 4rem;
             text-align: center;
             color: #ffd700;
@@ -400,7 +400,7 @@
 
         .gallery-caption h3 {
             color: #ffd700;
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 1.5rem;
         }
 
@@ -417,7 +417,7 @@
         }
 
         .fun-facts h2 {
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 4rem;
             text-align: center;
             color: #ffd700;
@@ -456,7 +456,7 @@
 
         .fact-card h3 {
             color: #ffd700;
-            font-family: 'Bangers', cursive;
+            font-family: 'Inter', sans-serif; font-weight: 700;
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
@@ -525,7 +525,7 @@
         </div>
 
         <div class="nino-photo-main" id="roarTrigger">
-            <img src="https://placedog.net/400/400?id=1" alt="Nino the Magnificent" id="ninoPhoto">
+            <img src="https://i.imgur.com/GYCTGOP.jpg" alt="Nino the Magnificent" id="ninoPhoto">
             <span class="click-me">CLICK FOR ROAR!</span>
         </div>
 
@@ -536,14 +536,14 @@
 
     <!-- Roar Overlay -->
     <div class="roar-overlay" id="roarOverlay">
-        <div class="roar-text">ROAR!</div>
-        <div class="roar-subtitle">*earth-shattering good boy noises*</div>
+        <div class="roar-text">WOOF!</div>
+        <div class="roar-subtitle">*big dog energy*</div>
     </div>
 
     <!-- Weight Section -->
     <section class="weight-section" id="weight">
         <h2>WHAT DOES NINO WEIGH?</h2>
-        <p class="weight-subtitle">Spoiler: He's an absolute chonky legend</p>
+        <p class="weight-subtitle">Down from 96.8 lbs - what a healthy boy!</p>
 
         <div class="current-weight">
             <div class="weight-number">89.2</div>
@@ -552,7 +552,7 @@
         </div>
 
         <div class="chart-container">
-            <h3 class="chart-title">Nino's Glorious Weight Journey</h3>
+            <h3 class="chart-title">Nino's Weight Loss Journey</h3>
             <svg class="weight-chart" viewBox="0 0 800 400">
                 <defs>
                     <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -569,26 +569,26 @@
                 <line class="grid-line" x1="50" y1="350" x2="750" y2="350"/>
 
                 <!-- Y-axis labels -->
-                <text class="axis-label" x="40" y="55" text-anchor="end">95</text>
-                <text class="axis-label" x="40" y="130" text-anchor="end">90</text>
-                <text class="axis-label" x="40" y="205" text-anchor="end">85</text>
-                <text class="axis-label" x="40" y="280" text-anchor="end">80</text>
-                <text class="axis-label" x="40" y="355" text-anchor="end">75</text>
+                <text class="axis-label" x="40" y="55" text-anchor="end">98</text>
+                <text class="axis-label" x="40" y="130" text-anchor="end">95</text>
+                <text class="axis-label" x="40" y="205" text-anchor="end">92</text>
+                <text class="axis-label" x="40" y="280" text-anchor="end">89</text>
+                <text class="axis-label" x="40" y="355" text-anchor="end">86</text>
 
-                <!-- Area fill -->
-                <path class="chart-area" d="M100,230 L200,200 L300,170 L400,155 L500,140 L600,125 L700,110 L700,350 L100,350 Z"/>
+                <!-- Area fill - weight going DOWN -->
+                <path class="chart-area" d="M100,80 L200,110 L300,155 L400,200 L500,230 L600,260 L700,275 L700,350 L100,350 Z"/>
 
-                <!-- Line -->
-                <path class="chart-line" d="M100,230 L200,200 L300,170 L400,155 L500,140 L600,125 L700,110"/>
+                <!-- Line - weight going DOWN -->
+                <path class="chart-line" d="M100,80 L200,110 L300,155 L400,200 L500,230 L600,260 L700,275"/>
 
                 <!-- Data Points -->
-                <circle class="chart-point" cx="100" cy="230" r="8"/>
-                <circle class="chart-point" cx="200" cy="200" r="8"/>
-                <circle class="chart-point" cx="300" cy="170" r="8"/>
-                <circle class="chart-point" cx="400" cy="155" r="8"/>
-                <circle class="chart-point" cx="500" cy="140" r="8"/>
-                <circle class="chart-point" cx="600" cy="125" r="8"/>
-                <circle class="chart-point" cx="700" cy="110" r="8" style="fill: #ff4500; r: 10;"/>
+                <circle class="chart-point" cx="100" cy="80" r="8"/>
+                <circle class="chart-point" cx="200" cy="110" r="8"/>
+                <circle class="chart-point" cx="300" cy="155" r="8"/>
+                <circle class="chart-point" cx="400" cy="200" r="8"/>
+                <circle class="chart-point" cx="500" cy="230" r="8"/>
+                <circle class="chart-point" cx="600" cy="260" r="8"/>
+                <circle class="chart-point" cx="700" cy="275" r="8" style="fill: #ff4500;"/>
 
                 <!-- X-axis labels -->
                 <text class="chart-label" x="100" y="380">Jan</text>
@@ -597,16 +597,16 @@
                 <text class="chart-label" x="400" y="380">Jul</text>
                 <text class="chart-label" x="500" y="380">Sep</text>
                 <text class="chart-label" x="600" y="380">Nov</text>
-                <text class="chart-label" x="700" y="380" style="fill: #ff4500; font-weight: bold;">NOW!</text>
+                <text class="chart-label" x="700" y="380" style="fill: #ff4500; font-weight: bold;">NOW</text>
 
-                <!-- Weight labels on points -->
-                <text class="chart-label" x="100" y="215" style="fill: #00ff88;">83.5</text>
-                <text class="chart-label" x="200" y="185" style="fill: #00ff88;">85.1</text>
-                <text class="chart-label" x="300" y="155" style="fill: #00ff88;">86.3</text>
-                <text class="chart-label" x="400" y="140" style="fill: #00ff88;">87.0</text>
-                <text class="chart-label" x="500" y="125" style="fill: #00ff88;">87.8</text>
-                <text class="chart-label" x="600" y="110" style="fill: #00ff88;">88.5</text>
-                <text class="chart-label" x="700" y="95" style="fill: #ff4500; font-weight: bold; font-size: 14px;">89.2!</text>
+                <!-- Weight labels on points - going DOWN -->
+                <text class="chart-label" x="100" y="65" style="fill: #00ff88;">96.8</text>
+                <text class="chart-label" x="200" y="95" style="fill: #00ff88;">95.2</text>
+                <text class="chart-label" x="300" y="140" style="fill: #00ff88;">93.5</text>
+                <text class="chart-label" x="400" y="185" style="fill: #00ff88;">91.8</text>
+                <text class="chart-label" x="500" y="215" style="fill: #00ff88;">90.5</text>
+                <text class="chart-label" x="600" y="245" style="fill: #00ff88;">89.8</text>
+                <text class="chart-label" x="700" y="295" style="fill: #ff4500; font-weight: bold; font-size: 14px;">89.2</text>
             </svg>
         </div>
     </section>
@@ -617,7 +617,7 @@
 
         <div class="photo-gallery">
             <div class="gallery-item">
-                <img src="https://placedog.net/500/500?id=10" alt="Nino on the couch">
+                <img src="https://i.imgur.com/GYCTGOP.jpg" alt="Nino on the couch">
                 <div class="gallery-caption">
                     <h3>The Royal Throne</h3>
                     <p>Nino claiming the couch like the king he is</p>
@@ -625,7 +625,7 @@
             </div>
 
             <div class="gallery-item">
-                <img src="https://placedog.net/500/500?id=15" alt="Nino on the bed">
+                <img src="https://i.imgur.com/Yi9CncA.jpg" alt="Nino on the bed">
                 <div class="gallery-caption">
                     <h3>Philosophical Nino</h3>
                     <p>Contemplating the meaning of treats</p>
@@ -633,7 +633,7 @@
             </div>
 
             <div class="gallery-item">
-                <img src="https://placedog.net/500/500?id=20" alt="Nino on picnic table">
+                <img src="https://i.imgur.com/X62VHty.jpg" alt="Nino on picnic table">
                 <div class="gallery-caption">
                     <h3>Sun Worship Mode</h3>
                     <p>Charging his solar-powered goodness</p>
@@ -641,7 +641,7 @@
             </div>
 
             <div class="gallery-item">
-                <img src="https://placedog.net/500/500?id=25" alt="Nino staring">
+                <img src="https://i.imgur.com/w1KUHrh.jpg" alt="Nino staring">
                 <div class="gallery-caption">
                     <h3>The Stare of Judgment</h3>
                     <p>He knows what you did. He forgives you anyway.</p>
@@ -688,55 +688,22 @@
         <p style="margin-top: 1rem; font-size: 0.8rem;">All weights are 100% real and 100% majestic</p>
     </footer>
 
+    <!-- Dog bark sound -->
+    <audio id="barkSound" preload="auto">
+        <source src="https://www.soundjay.com/animal/sounds/dog-barking-01.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         // Roar functionality
         const roarTrigger = document.getElementById('roarTrigger');
         const roarOverlay = document.getElementById('roarOverlay');
-
-        // Roar sounds - we'll generate them with Web Audio API
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const barkSound = document.getElementById('barkSound');
 
         function playRoar() {
-            // Create oscillator for a funny "ROAR" sound
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-
-            // Start with a low growl
-            oscillator.frequency.setValueAtTime(100, audioContext.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
-            oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.3);
-            oscillator.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + 0.5);
-            oscillator.frequency.exponentialRampToValueAtTime(60, audioContext.currentTime + 0.8);
-
-            oscillator.type = 'sawtooth';
-
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
-
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 1);
-
-            // Add a second layer for more "roar" effect
-            const oscillator2 = audioContext.createOscillator();
-            const gainNode2 = audioContext.createGain();
-
-            oscillator2.connect(gainNode2);
-            gainNode2.connect(audioContext.destination);
-
-            oscillator2.frequency.setValueAtTime(150, audioContext.currentTime);
-            oscillator2.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.15);
-            oscillator2.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.4);
-
-            oscillator2.type = 'square';
-
-            gainNode2.gain.setValueAtTime(0.15, audioContext.currentTime);
-            gainNode2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
-
-            oscillator2.start(audioContext.currentTime);
-            oscillator2.stop(audioContext.currentTime + 0.8);
+            // Play actual dog bark
+            barkSound.currentTime = 0;
+            barkSound.volume = 0.7;
+            barkSound.play().catch(e => console.log('Audio play failed:', e));
         }
 
         roarTrigger.addEventListener('click', () => {
