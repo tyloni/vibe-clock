@@ -693,36 +693,54 @@
         const roarTrigger = document.getElementById('roarTrigger');
         const roarOverlay = document.getElementById('roarOverlay');
 
-        // Create dog bark using Web Audio API
+        // Create AWOOOGAH horn sound
         function playBark() {
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-            // Bark 1
-            function bark(startTime) {
-                const osc = audioContext.createOscillator();
-                const gain = audioContext.createGain();
-                osc.connect(gain);
-                gain.connect(audioContext.destination);
-
-                osc.frequency.setValueAtTime(400, startTime);
-                osc.frequency.exponentialRampToValueAtTime(150, startTime + 0.1);
-                osc.frequency.exponentialRampToValueAtTime(300, startTime + 0.15);
-                osc.frequency.exponentialRampToValueAtTime(100, startTime + 0.25);
-
-                osc.type = 'sawtooth';
-
-                gain.gain.setValueAtTime(0.4, startTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.25);
-
-                osc.start(startTime);
-                osc.stop(startTime + 0.25);
-            }
-
-            // Play 3 barks
             const now = audioContext.currentTime;
-            bark(now);
-            bark(now + 0.3);
-            bark(now + 0.6);
+
+            // AWOOOO part (rising)
+            const osc1 = audioContext.createOscillator();
+            const gain1 = audioContext.createGain();
+            osc1.connect(gain1);
+            gain1.connect(audioContext.destination);
+            osc1.type = 'sawtooth';
+            osc1.frequency.setValueAtTime(150, now);
+            osc1.frequency.linearRampToValueAtTime(400, now + 0.4);
+            gain1.gain.setValueAtTime(0.5, now);
+            gain1.gain.setValueAtTime(0.5, now + 0.35);
+            gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+            osc1.start(now);
+            osc1.stop(now + 0.5);
+
+            // GAH part (falling honk)
+            const osc2 = audioContext.createOscillator();
+            const gain2 = audioContext.createGain();
+            osc2.connect(gain2);
+            gain2.connect(audioContext.destination);
+            osc2.type = 'sawtooth';
+            osc2.frequency.setValueAtTime(400, now + 0.5);
+            osc2.frequency.linearRampToValueAtTime(200, now + 0.8);
+            osc2.frequency.linearRampToValueAtTime(100, now + 1.1);
+            gain2.gain.setValueAtTime(0.6, now + 0.5);
+            gain2.gain.setValueAtTime(0.5, now + 0.9);
+            gain2.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
+            osc2.start(now + 0.5);
+            osc2.stop(now + 1.2);
+
+            // Add a second layer for richness
+            const osc3 = audioContext.createOscillator();
+            const gain3 = audioContext.createGain();
+            osc3.connect(gain3);
+            gain3.connect(audioContext.destination);
+            osc3.type = 'square';
+            osc3.frequency.setValueAtTime(75, now);
+            osc3.frequency.linearRampToValueAtTime(200, now + 0.4);
+            osc3.frequency.setValueAtTime(200, now + 0.5);
+            osc3.frequency.linearRampToValueAtTime(50, now + 1.1);
+            gain3.gain.setValueAtTime(0.2, now);
+            gain3.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
+            osc3.start(now);
+            osc3.stop(now + 1.2);
         }
 
         roarTrigger.addEventListener('click', () => {
