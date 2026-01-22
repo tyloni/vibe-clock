@@ -688,27 +688,46 @@
         <p style="margin-top: 1rem; font-size: 0.8rem;">All weights are 100% real and 100% majestic</p>
     </footer>
 
-    <!-- Dog bark sound -->
-    <audio id="barkSound" preload="auto">
-        <source src="https://www.soundjay.com/animal/sounds/dog-barking-01.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
         // Roar functionality
         const roarTrigger = document.getElementById('roarTrigger');
         const roarOverlay = document.getElementById('roarOverlay');
-        const barkSound = document.getElementById('barkSound');
 
-        function playRoar() {
-            // Play actual dog bark
-            barkSound.currentTime = 0;
-            barkSound.volume = 0.7;
-            barkSound.play().catch(e => console.log('Audio play failed:', e));
+        // Create dog bark using Web Audio API
+        function playBark() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            // Bark 1
+            function bark(startTime) {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+
+                osc.frequency.setValueAtTime(400, startTime);
+                osc.frequency.exponentialRampToValueAtTime(150, startTime + 0.1);
+                osc.frequency.exponentialRampToValueAtTime(300, startTime + 0.15);
+                osc.frequency.exponentialRampToValueAtTime(100, startTime + 0.25);
+
+                osc.type = 'sawtooth';
+
+                gain.gain.setValueAtTime(0.4, startTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.25);
+
+                osc.start(startTime);
+                osc.stop(startTime + 0.25);
+            }
+
+            // Play 3 barks
+            const now = audioContext.currentTime;
+            bark(now);
+            bark(now + 0.3);
+            bark(now + 0.6);
         }
 
         roarTrigger.addEventListener('click', () => {
             roarOverlay.classList.add('active');
-            playRoar();
+            playBark();
 
             // Add screen shake effect
             document.body.style.animation = 'none';
