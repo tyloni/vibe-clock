@@ -526,7 +526,7 @@
 
         <div class="nino-photo-main" id="roarTrigger">
             <img src="https://i.imgur.com/jnXUeRS.jpeg" alt="Nino the Magnificent" id="ninoPhoto">
-            <span class="click-me">CLICK FOR AWOOGA!</span>
+            <span class="click-me">CLICK FOR SONG!</span>
         </div>
 
         <a href="#weight" class="nav-arrow">
@@ -536,8 +536,8 @@
 
     <!-- Roar Overlay -->
     <div class="roar-overlay" id="roarOverlay">
-        <div class="roar-text">AWOOGA!</div>
-        <div class="roar-subtitle">*vintage horn energy*</div>
+        <div class="roar-text">NINO!</div>
+        <div class="roar-subtitle">*barbershop quartet intensifies*</div>
     </div>
 
     <!-- Weight Section -->
@@ -693,77 +693,104 @@
         const roarTrigger = document.getElementById('roarTrigger');
         const roarOverlay = document.getElementById('roarOverlay');
 
-        // Classic AWOOGA vintage car horn - high quality synthesis
+        // Barbershop Quartet: "NINO!" - A 10-second dog anthem
         function playBark() {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
             const now = ctx.currentTime;
 
-            // Master gain and compressor for punch
+            // Master output
             const master = ctx.createGain();
-            const compressor = ctx.createDynamicsCompressor();
-            master.connect(compressor);
-            compressor.connect(ctx.destination);
-            master.gain.value = 0.7;
+            const reverb = ctx.createConvolver();
+            master.gain.value = 0.6;
+            master.connect(ctx.destination);
 
-            function createHorn(startTime, duration, startFreq, endFreq) {
-                // Main oscillator
+            // Create a voice (sine + harmonics for vocal quality)
+            function singNote(freq, start, duration, volume = 0.25) {
                 const osc = ctx.createOscillator();
+                const osc2 = ctx.createOscillator();
                 const gain = ctx.createGain();
                 const filter = ctx.createBiquadFilter();
 
-                // Vibrato LFO for wobble
-                const lfo = ctx.createOscillator();
-                const lfoGain = ctx.createGain();
+                // Vibrato for natural voice
+                const vibrato = ctx.createOscillator();
+                const vibratoGain = ctx.createGain();
+                vibrato.frequency.value = 5;
+                vibratoGain.gain.value = 3;
+                vibrato.connect(vibratoGain);
+                vibratoGain.connect(osc.frequency);
+                vibratoGain.connect(osc2.frequency);
 
                 osc.connect(filter);
+                osc2.connect(filter);
                 filter.connect(gain);
                 gain.connect(master);
 
-                lfo.connect(lfoGain);
-                lfoGain.connect(osc.frequency);
+                osc.type = 'sine';
+                osc2.type = 'triangle';
+                osc.frequency.value = freq;
+                osc2.frequency.value = freq * 2; // Octave harmonic
 
-                // Horn character
-                osc.type = 'sawtooth';
                 filter.type = 'lowpass';
-                filter.frequency.value = 2000;
-                filter.Q.value = 2;
+                filter.frequency.value = 3000;
 
-                // Vibrato settings
-                lfo.frequency.value = 8;
-                lfoGain.gain.value = 15;
+                // Volume envelope (gentle attack/release)
+                gain.gain.setValueAtTime(0.01, start);
+                gain.gain.exponentialRampToValueAtTime(volume, start + 0.05);
+                gain.gain.setValueAtTime(volume, start + duration - 0.08);
+                gain.gain.exponentialRampToValueAtTime(0.01, start + duration);
 
-                // Frequency sweep
-                osc.frequency.setValueAtTime(startFreq, startTime);
-                osc.frequency.linearRampToValueAtTime(endFreq, startTime + duration * 0.8);
-
-                // Volume envelope
-                gain.gain.setValueAtTime(0.01, startTime);
-                gain.gain.exponentialRampToValueAtTime(0.5, startTime + 0.05);
-                gain.gain.setValueAtTime(0.5, startTime + duration - 0.1);
-                gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-
-                osc.start(startTime);
-                osc.stop(startTime + duration);
-                lfo.start(startTime);
-                lfo.stop(startTime + duration);
-
-                // Add sub-harmonic for depth
-                const sub = ctx.createOscillator();
-                const subGain = ctx.createGain();
-                sub.connect(subGain);
-                subGain.connect(master);
-                sub.type = 'sine';
-                sub.frequency.setValueAtTime(startFreq / 2, startTime);
-                sub.frequency.linearRampToValueAtTime(endFreq / 2, startTime + duration * 0.8);
-                subGain.gain.setValueAtTime(0.3, startTime);
-                subGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-                sub.start(startTime);
-                sub.stop(startTime + duration);
+                osc.start(start);
+                osc.stop(start + duration);
+                osc2.start(start);
+                osc2.stop(start + duration);
+                vibrato.start(start);
+                vibrato.stop(start + duration);
             }
 
-            // AWOOOO (rising) then GAH (falling) - classic 2-tone horn
-            createHorn(now, 0.5, 280, 420);        // First tone rising
-            createHorn(now + 0.5, 0.6, 420, 180);  // Second tone falling
+            // Barbershop chord (4 voices)
+            function chord(bass, bari, lead, tenor, start, duration) {
+                singNote(bass, start, duration, 0.2);   // Bass
+                singNote(bari, start, duration, 0.18);  // Baritone
+                singNote(lead, start, duration, 0.25);  // Lead (melody)
+                singNote(tenor, start, duration, 0.15); // Tenor
+            }
+
+            // Note frequencies
+            const C3=130.81, E3=164.81, G3=196, C4=261.63, E4=329.63, G4=392, C5=523.25;
+            const D4=293.66, F4=349.23, A4=440, B4=493.88, D5=587.33;
+            const A3=220, B3=246.94, F3=174.61, D3=146.83;
+
+            // "NI-NO!" (call)
+            chord(C3, G3, E4, G4, now, 0.4);           // "NI"
+            chord(G3, D4, B4, D5, now + 0.45, 0.5);    // "NO!"
+
+            // "(He's a)" - quick pickup
+            chord(C3, E3, G3, C4, now + 1.1, 0.2);     // "He's"
+            chord(C3, E3, G3, C4, now + 1.35, 0.15);   // "a"
+
+            // "GOOD BOY"
+            chord(F3, A3, C4, F4, now + 1.6, 0.4);     // "GOOD"
+            chord(G3, B3, D4, G4, now + 2.05, 0.6);    // "BOY"
+
+            // "Eight-y nine pounds"
+            chord(C3, E3, G3, C4, now + 2.8, 0.25);    // "Eight"
+            chord(C3, E3, G3, C4, now + 3.1, 0.2);     // "y"
+            chord(D3, F3, A3, D4, now + 3.35, 0.3);    // "nine"
+            chord(E3, G3, B3, E4, now + 3.7, 0.4);     // "pounds"
+
+            // "of PURE JOY!"
+            chord(F3, A3, C4, F4, now + 4.2, 0.2);     // "of"
+            chord(G3, B3, D4, G4, now + 4.45, 0.5);    // "PURE"
+            chord(C3, E3, G3, C4, now + 5.0, 0.3);     // "JOY"
+
+            // Big finish: "NIIII-NOOOOO!"
+            chord(C3, G3, E4, G4, now + 5.5, 0.6);     // "NI" (building)
+            chord(C3, G3, E4, C5, now + 6.2, 1.2);     // "NOOOOO!" (big hold)
+
+            // Final tag chord (classic barbershop ending)
+            chord(C3, E3, G3, C4, now + 7.6, 0.15);    // quick
+            chord(C3, E3, G3, E4, now + 7.8, 0.15);    // hits
+            chord(C3, G3, E4, G4, now + 8.0, 1.5);     // BIG FINISH!
         }
 
         roarTrigger.addEventListener('click', () => {
@@ -778,7 +805,7 @@
             setTimeout(() => {
                 roarOverlay.classList.remove('active');
                 document.body.style.animation = '';
-            }, 1500);
+            }, 10000);
         });
 
         // Click anywhere to dismiss roar
