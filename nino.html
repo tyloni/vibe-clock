@@ -738,50 +738,28 @@
             chord(G, now + 7, 0.9);
             chord(C, now + 8, 1.5);
 
-            // LAYERED HARMONIC ROBOT CHOIR!
+            // Single robot voice singing
             const synth = window.speechSynthesis;
             synth.cancel();
 
-            // Barbershop parts: Bass, Baritone, Lead, Tenor
-            const harmonies = [
-                { pitch: 0.5, rate: 0.7 },   // Bass - low and slow
-                { pitch: 0.8, rate: 0.75 },  // Baritone
-                { pitch: 1.0, rate: 0.8 },   // Lead
-                { pitch: 1.5, rate: 0.85 },  // Tenor - high
-            ];
-
             const lyrics = [
-                { text: "Nino!", delay: 0 },
-                { text: "He's a good boy!", delay: 1200 },
-                { text: "Eighty nine pounds", delay: 2800 },
-                { text: "of pure joy!", delay: 4500 },
-                { text: "Niiiiinoooo!", delay: 6000 },
-                { text: "Good boy!", delay: 8000 },
+                { text: "Nino!", delay: 0, pitch: 1.2, rate: 0.8 },
+                { text: "He's a good boy!", delay: 1200, pitch: 1.0, rate: 0.9 },
+                { text: "Eighty nine pounds", delay: 2800, pitch: 1.1, rate: 0.85 },
+                { text: "of pure joy!", delay: 4500, pitch: 1.3, rate: 0.8 },
+                { text: "Niiiiinoooo!", delay: 6000, pitch: 1.4, rate: 0.6 },
+                { text: "Good boy!", delay: 8000, pitch: 1.5, rate: 0.7 },
             ];
 
-            // Sing each lyric with all 4 harmony voices
-            lyrics.forEach(({ text, delay }) => {
-                harmonies.forEach((harmony, i) => {
-                    setTimeout(() => {
-                        const utterance = new SpeechSynthesisUtterance(text);
-                        utterance.pitch = harmony.pitch;
-                        utterance.rate = harmony.rate;
-                        utterance.volume = 0.7;
-                        const voices = synth.getVoices();
-                        // Try different voices for each part
-                        if (voices.length > i) {
-                            utterance.voice = voices[i % voices.length];
-                        }
-                        synth.speak(utterance);
-                    }, delay + (i * 30)); // Slight stagger for chorus effect
-                });
+            lyrics.forEach(({ text, delay, pitch, rate }) => {
+                setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.pitch = pitch;
+                    utterance.rate = rate;
+                    utterance.volume = 1;
+                    synth.speak(utterance);
+                }, delay);
             });
-        }
-
-        // Pre-load voices
-        if (window.speechSynthesis) {
-            speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
-            window.speechSynthesis.getVoices();
         }
 
         roarTrigger.addEventListener('click', () => {
