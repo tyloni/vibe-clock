@@ -526,7 +526,7 @@
 
         <div class="nino-photo-main" id="roarTrigger">
             <img src="https://i.imgur.com/jnXUeRS.jpeg" alt="Nino the Magnificent" id="ninoPhoto">
-            <span class="click-me">CLICK FOR ROAR!</span>
+            <span class="click-me">CLICK FOR AWOOGA!</span>
         </div>
 
         <a href="#weight" class="nav-arrow">
@@ -536,8 +536,8 @@
 
     <!-- Roar Overlay -->
     <div class="roar-overlay" id="roarOverlay">
-        <div class="roar-text">WOOF!</div>
-        <div class="roar-subtitle">*big dog energy*</div>
+        <div class="roar-text">AWOOGA!</div>
+        <div class="roar-subtitle">*vintage horn energy*</div>
     </div>
 
     <!-- Weight Section -->
@@ -693,54 +693,77 @@
         const roarTrigger = document.getElementById('roarTrigger');
         const roarOverlay = document.getElementById('roarOverlay');
 
-        // Create AWOOOGAH horn sound
+        // Classic AWOOGA vintage car horn - high quality synthesis
         function playBark() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const now = audioContext.currentTime;
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = ctx.currentTime;
 
-            // AWOOOO part (rising)
-            const osc1 = audioContext.createOscillator();
-            const gain1 = audioContext.createGain();
-            osc1.connect(gain1);
-            gain1.connect(audioContext.destination);
-            osc1.type = 'sawtooth';
-            osc1.frequency.setValueAtTime(150, now);
-            osc1.frequency.linearRampToValueAtTime(400, now + 0.4);
-            gain1.gain.setValueAtTime(0.5, now);
-            gain1.gain.setValueAtTime(0.5, now + 0.35);
-            gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
-            osc1.start(now);
-            osc1.stop(now + 0.5);
+            // Master gain and compressor for punch
+            const master = ctx.createGain();
+            const compressor = ctx.createDynamicsCompressor();
+            master.connect(compressor);
+            compressor.connect(ctx.destination);
+            master.gain.value = 0.7;
 
-            // GAH part (falling honk)
-            const osc2 = audioContext.createOscillator();
-            const gain2 = audioContext.createGain();
-            osc2.connect(gain2);
-            gain2.connect(audioContext.destination);
-            osc2.type = 'sawtooth';
-            osc2.frequency.setValueAtTime(400, now + 0.5);
-            osc2.frequency.linearRampToValueAtTime(200, now + 0.8);
-            osc2.frequency.linearRampToValueAtTime(100, now + 1.1);
-            gain2.gain.setValueAtTime(0.6, now + 0.5);
-            gain2.gain.setValueAtTime(0.5, now + 0.9);
-            gain2.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
-            osc2.start(now + 0.5);
-            osc2.stop(now + 1.2);
+            function createHorn(startTime, duration, startFreq, endFreq) {
+                // Main oscillator
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                const filter = ctx.createBiquadFilter();
 
-            // Add a second layer for richness
-            const osc3 = audioContext.createOscillator();
-            const gain3 = audioContext.createGain();
-            osc3.connect(gain3);
-            gain3.connect(audioContext.destination);
-            osc3.type = 'square';
-            osc3.frequency.setValueAtTime(75, now);
-            osc3.frequency.linearRampToValueAtTime(200, now + 0.4);
-            osc3.frequency.setValueAtTime(200, now + 0.5);
-            osc3.frequency.linearRampToValueAtTime(50, now + 1.1);
-            gain3.gain.setValueAtTime(0.2, now);
-            gain3.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
-            osc3.start(now);
-            osc3.stop(now + 1.2);
+                // Vibrato LFO for wobble
+                const lfo = ctx.createOscillator();
+                const lfoGain = ctx.createGain();
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(master);
+
+                lfo.connect(lfoGain);
+                lfoGain.connect(osc.frequency);
+
+                // Horn character
+                osc.type = 'sawtooth';
+                filter.type = 'lowpass';
+                filter.frequency.value = 2000;
+                filter.Q.value = 2;
+
+                // Vibrato settings
+                lfo.frequency.value = 8;
+                lfoGain.gain.value = 15;
+
+                // Frequency sweep
+                osc.frequency.setValueAtTime(startFreq, startTime);
+                osc.frequency.linearRampToValueAtTime(endFreq, startTime + duration * 0.8);
+
+                // Volume envelope
+                gain.gain.setValueAtTime(0.01, startTime);
+                gain.gain.exponentialRampToValueAtTime(0.5, startTime + 0.05);
+                gain.gain.setValueAtTime(0.5, startTime + duration - 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+                osc.start(startTime);
+                osc.stop(startTime + duration);
+                lfo.start(startTime);
+                lfo.stop(startTime + duration);
+
+                // Add sub-harmonic for depth
+                const sub = ctx.createOscillator();
+                const subGain = ctx.createGain();
+                sub.connect(subGain);
+                subGain.connect(master);
+                sub.type = 'sine';
+                sub.frequency.setValueAtTime(startFreq / 2, startTime);
+                sub.frequency.linearRampToValueAtTime(endFreq / 2, startTime + duration * 0.8);
+                subGain.gain.setValueAtTime(0.3, startTime);
+                subGain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+                sub.start(startTime);
+                sub.stop(startTime + duration);
+            }
+
+            // AWOOOO (rising) then GAH (falling) - classic 2-tone horn
+            createHorn(now, 0.5, 280, 420);        // First tone rising
+            createHorn(now + 0.5, 0.6, 420, 180);  // Second tone falling
         }
 
         roarTrigger.addEventListener('click', () => {
