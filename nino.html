@@ -546,7 +546,7 @@
         <p class="weight-subtitle">Down from 96.8 lbs - what a healthy boy!</p>
 
         <div class="current-weight">
-            <div class="weight-number">89.2</div>
+            <div class="weight-number">88.3</div>
             <div class="weight-unit">POUNDS OF PURE MAJESTY</div>
             <p class="weight-comment">"He's not fat, he's just full of love (and treats)"</p>
         </div>
@@ -576,10 +576,10 @@
                 <text class="axis-label" x="40" y="355" text-anchor="end">86</text>
 
                 <!-- Area fill - weight going DOWN -->
-                <path class="chart-area" d="M100,80 L200,110 L300,155 L400,200 L500,230 L600,260 L700,275 L700,350 L100,350 Z"/>
+                <path class="chart-area" d="M100,80 L200,110 L300,155 L400,200 L500,230 L600,260 L700,297 L700,350 L100,350 Z"/>
 
                 <!-- Line - weight going DOWN -->
-                <path class="chart-line" d="M100,80 L200,110 L300,155 L400,200 L500,230 L600,260 L700,275"/>
+                <path class="chart-line" d="M100,80 L200,110 L300,155 L400,200 L500,230 L600,260 L700,297"/>
 
                 <!-- Data Points -->
                 <circle class="chart-point" cx="100" cy="80" r="8"/>
@@ -588,7 +588,7 @@
                 <circle class="chart-point" cx="400" cy="200" r="8"/>
                 <circle class="chart-point" cx="500" cy="230" r="8"/>
                 <circle class="chart-point" cx="600" cy="260" r="8"/>
-                <circle class="chart-point" cx="700" cy="275" r="8" style="fill: #ff4500;"/>
+                <circle class="chart-point" cx="700" cy="297" r="8" style="fill: #ff4500;"/>
 
                 <!-- X-axis labels -->
                 <text class="chart-label" x="100" y="380">Jan</text>
@@ -606,7 +606,7 @@
                 <text class="chart-label" x="400" y="185" style="fill: #00ff88;">91.8</text>
                 <text class="chart-label" x="500" y="215" style="fill: #00ff88;">90.5</text>
                 <text class="chart-label" x="600" y="245" style="fill: #00ff88;">89.8</text>
-                <text class="chart-label" x="700" y="295" style="fill: #ff4500; font-weight: bold; font-size: 14px;">89.2</text>
+                <text class="chart-label" x="700" y="317" style="fill: #ff4500; font-weight: bold; font-size: 14px;">88.3</text>
             </svg>
         </div>
     </section>
@@ -664,7 +664,7 @@
             <div class="fact-card">
                 <div class="fact-icon">🛋️</div>
                 <h3>Couch Domination</h3>
-                <p>Has claimed 89.2 lbs worth of couch real estate</p>
+                <p>Has claimed 88.3 lbs worth of couch real estate</p>
             </div>
 
             <div class="fact-card">
@@ -772,7 +772,7 @@
                 { text: "He's a raw dog!", delay: 1000, pitch: 1.1, rate: 0.85 },
 
                 // Verse 1
-                { text: "Eighty nine pounds of absolute unit!", delay: 2200, pitch: 1.0, rate: 0.9 },
+                { text: "Eighty eight pounds of absolute unit!", delay: 2200, pitch: 1.0, rate: 0.9 },
                 { text: "He sits on the couch, and he owns it!", delay: 4000, pitch: 1.1, rate: 0.85 },
                 { text: "No leash can hold him!", delay: 5500, pitch: 1.2, rate: 0.8 },
                 { text: "No treat can bribe him!", delay: 6700, pitch: 1.1, rate: 0.85 },
@@ -790,7 +790,7 @@
 
                 // Bridge
                 { text: "From ninety six point eight pounds!", delay: 18800, pitch: 1.0, rate: 0.9 },
-                { text: "Down to eighty nine point two!", delay: 20200, pitch: 1.1, rate: 0.85 },
+                { text: "Down to eighty eight point three!", delay: 20200, pitch: 1.1, rate: 0.85 },
                 { text: "That's called a glow up, baby!", delay: 21600, pitch: 1.3, rate: 0.8 },
 
                 // Final Chorus
@@ -843,7 +843,7 @@
         // Add weight counter animation
         function animateWeight() {
             const weightNumber = document.querySelector('.weight-number');
-            const targetWeight = 89.2;
+            const targetWeight = 88.3;
             let currentWeight = 0;
             const duration = 2000;
             const startTime = performance.now();
@@ -881,7 +881,7 @@
 
         // Chart point tooltips
         document.querySelectorAll('.chart-point').forEach((point, index) => {
-            const weights = [83.5, 85.1, 86.3, 87.0, 87.8, 88.5, 89.2];
+            const weights = [83.5, 85.1, 86.3, 87.0, 87.8, 88.5, 88.3];
             const months = ['January', 'March', 'May', 'July', 'September', 'November', 'Now'];
 
             point.addEventListener('mouseenter', () => {
